@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home";
-import Form from "./components/Form";
-import Course from "./components/Course";
+import Home from "./pages/Home";
+import Form from "./pages/Form";
+import Course from "./pages/Course";
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/create' element={<Form />} />
         <Route path='/:courseId' element={<Course />} />
-        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </>
   );
