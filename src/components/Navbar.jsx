@@ -1,10 +1,16 @@
-import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Button, List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigator = useNavigate();
-  const newCourseButton = () => {
-    navigator("/create");
+  const handleCreateCourse = () => {
+    navigator("/create_course");
+  };
+  const handleCreateModule = () => {
+    navigator("/create_module");
+  };
+  const handleMainPage = () => {
+    navigator("/");
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -15,17 +21,27 @@ const Navbar = () => {
             variant='h6'
             color='white'
             component='div'
-            sx={{ flexGrow: 1 }}
+            onClick={handleMainPage}
+            sx={{ flexGrow: 1, cursor: "pointer" }}
           >
-            News
+            CourseList
           </Typography>
-          <Button
-            variant='contained'
-            color='secondary'
-            onClick={newCourseButton}
-          >
-            Create a new course
-          </Button>
+          <List sx={{ display: "flex", gap: "5px" }}>
+            <Button
+              variant='contained'
+              color='secondary'
+              onClick={handleCreateCourse}
+            >
+              Create a new course
+            </Button>
+            <Button
+              variant='contained'
+              color='secondary'
+              onClick={handleCreateModule}
+            >
+              Create a new module
+            </Button>
+          </List>
         </Toolbar>
       </AppBar>
     </Box>
