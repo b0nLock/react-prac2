@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchCourses = createAsyncThunk(
   "courses/fetchCourses",
-  async (_, { rejectWithValue }) => {
+  async () => {
     try {
       const res = await fetch("http://localhost:3001/courses");
       if (!res.ok) throw new Error("Unable to fetch course. Server error.");
       return await res.json();
-    } catch (err) {
-      return rejectWithValue(err.message);
+    } catch {
+      return "";
     }
   }
 );

@@ -1,27 +1,14 @@
 import {
   Box,
   Container,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
+  Typography,
 } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { fetchCourses } from "../redux/coursesSlice";
-import { useNavigate } from "react-router-dom";
+import CoursesList from "../components/CoursesList";
 
-const Home = () => {
-  const dispatch = useDispatch();
-
-  const courses = useSelector((state) => state.courses.items);
-  const coursesStatus = useSelector((state) => state.courses.status);
-  const navigator = useNavigate();
-
-  const handleCourse = (id) => {
-    navigator(`/${id}`);
-  };
+const Home = ({ dispatch, courses, coursesStatus, navigator }) => {
 
   useEffect(() => {
     if (coursesStatus === "idle") dispatch(fetchCourses());
@@ -30,20 +17,21 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Container>
-        <Box bgcolor='#ae65f7' my={6} borderRadius={6}>
-          <List>
-            {courses.map((course) => (
-              <ListItem key={course.id} disablePadding>
-                <ListItemButton onClick={() => handleCourse(course.id)}>
-                  <ListItemText
-                    primary={`Курс ${course.id}: ${course.title}`}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+      <Container sx={{ pt: "50px" }}>
+        <Typography variant='h3' fontWeight='700' sx={{ pb: "20px" }}>
+          Список курсов
+        </Typography>
+        {coursesStatus === "loading" && (
+          <Typography variant='h3'>Loading...</Typography>
+        )}
+        {coursesStatus !== "loading" && courses.length === 0 && (
+          <Typography variant='h6'>Курсы не найдены</Typography>
+        )}
+        {courses.length > 0 && (
+          <Box bgcolor='#ae65f7' borderRadius={6}>
+            <CoursesList navigator={navigator} courses={courses} />
+          </Box>
+        )}
       </Container>
     </>
   );
