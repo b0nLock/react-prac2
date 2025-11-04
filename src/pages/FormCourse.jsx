@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Home = () => {
+const FormCourse = () => {
   return (
     <></>
   )
 }
 
-export default Home
+export default FormCourse

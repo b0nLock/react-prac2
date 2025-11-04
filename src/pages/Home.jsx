@@ -1,0 +1,40 @@
+import {
+  Box,
+  Container,
+  Typography,
+} from "@mui/material";
+import { useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { fetchCourses } from "../redux/coursesSlice";
+import CoursesList from "../components/CoursesList";
+
+const Home = ({ dispatch, courses, coursesStatus, navigator }) => {
+
+  useEffect(() => {
+    if (coursesStatus === "idle") dispatch(fetchCourses());
+  }, [dispatch, coursesStatus]);
+
+  return (
+    <>
+      <Navbar />
+      <Container sx={{ pt: "50px" }}>
+        <Typography variant='h3' fontWeight='700' sx={{ pb: "20px" }}>
+          Список курсов
+        </Typography>
+        {coursesStatus === "loading" && (
+          <Typography variant='h3'>Loading...</Typography>
+        )}
+        {coursesStatus !== "loading" && courses.length === 0 && (
+          <Typography variant='h6'>Курсы не найдены</Typography>
+        )}
+        {courses.length > 0 && (
+          <Box bgcolor='#ae65f7' borderRadius={6}>
+            <CoursesList navigator={navigator} courses={courses} />
+          </Box>
+        )}
+      </Container>
+    </>
+  );
+};
+
+export default Home;
