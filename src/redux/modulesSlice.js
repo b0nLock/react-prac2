@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchModules } from "../api/fetchModules";
+import { postModule } from "../api/postModule";
 
 const modulesSlice = createSlice({
   name: "modules",
@@ -21,6 +22,18 @@ const modulesSlice = createSlice({
       })
       .addCase(fetchModules.rejected, (state, action) => {
         state.status = "failed";
+        state.error = action.payload || action.error.message;
+      })
+
+      .addCase(postModule.pending, (state) => {
+        state.postStatus = "loading";
+      })
+      .addCase(postModule.fulfilled, (state, action) => {
+        state.postStatus = "succeeded";
+        state.items.push(action.payload);
+      })
+      .addCase(postModule.rejected, (state, action) => {
+        state.postStatus = "failed";
         state.error = action.payload || action.error.message;
       });
   },

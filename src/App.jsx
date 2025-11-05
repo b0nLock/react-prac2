@@ -48,7 +48,6 @@ function App() {
               dispatch={dispatch}
               courses={courses}
               coursesStatus={coursesStatus}
-              navigator={navigator}
               modules={modules}
             />
           }
