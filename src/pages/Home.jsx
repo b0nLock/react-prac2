@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import CoursesList from "../components/CoursesList";
@@ -16,9 +16,7 @@ const Home = ({ dispatch, courses, coursesStatus, navigator }) => {
         <Typography variant='h3' fontWeight='700' sx={{ pb: "20px" }}>
           Список курсов
         </Typography>
-        {coursesStatus === "loading" && (
-          <Typography variant='h3'>Loading...</Typography>
-        )}
+        {coursesStatus === "loading" && <CircularProgress color='secondary' />}
         {coursesStatus !== "loading" && courses.length === 0 && (
           <Typography variant='h6'>Курсы не найдены</Typography>
         )}
