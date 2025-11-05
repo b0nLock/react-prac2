@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { fetchModules } from "../redux/modulesSlice";
 import {
   Box,
   Container,
@@ -10,7 +9,8 @@ import {
   Typography,
   ListItemText,
 } from "@mui/material";
-import { fetchCourses } from "../redux/coursesSlice";
+import { fetchCourses } from "../api/fetchCourses";
+import { fetchModules } from "../api/fetchModules";
 
 const Course = ({
   dispatch,

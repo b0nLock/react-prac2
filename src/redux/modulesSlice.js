@@ -1,17 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-export const fetchModules = createAsyncThunk(
-  "modules/fetchModules",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await fetch("http://localhost:3001/modules");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchModules } from "../api/fetchModules";
 
 const modulesSlice = createSlice({
   name: "modules",

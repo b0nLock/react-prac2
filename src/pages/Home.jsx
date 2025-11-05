@@ -1,15 +1,10 @@
-import {
-  Box,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { fetchCourses } from "../redux/coursesSlice";
 import CoursesList from "../components/CoursesList";
+import { fetchCourses } from "../api/fetchCourses";
 
 const Home = ({ dispatch, courses, coursesStatus, navigator }) => {
-
   useEffect(() => {
     if (coursesStatus === "idle") dispatch(fetchCourses());
   }, [dispatch, coursesStatus]);
