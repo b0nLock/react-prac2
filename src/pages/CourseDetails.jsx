@@ -8,6 +8,7 @@ import {
   ListItem,
   Typography,
   ListItemText,
+  CircularProgress
 } from "@mui/material";
 import { fetchCourses } from "../api/fetchCourses";
 import { fetchModules } from "../api/fetchModules";
@@ -38,7 +39,7 @@ const Course = ({
       <Navbar />
       <Container sx={{ py: "50px" }}>
         {modulesStatus === "loading" && (
-          <Typography variant='h3'>Loading...</Typography>
+          <CircularProgress color='secondary' />
         )}
         {modulesStatus === "succeeded" && (
           <Box>
